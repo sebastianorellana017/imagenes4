@@ -1,18 +1,18 @@
 databases:
-  - name: djangocrud
-    databaseName: djangocrud
-    user: djangocrud
+  - name: demo_imagenes
+    databaseName: demo_imagenes
+    user: demo_imagenes
  
 services:
   - type: web
-    name: djangocrud
+    name: demo_imagenes
     env: python
     buildCommand: "./build.sh"
-    startCommand: "gunicorn djangocrud.wsgi:application"
+    startCommand: "gunicorn demo_imagenes.wsgi:application"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: djangocrud
+          name: demo_imagenes
           property: connectionString
       - key: SECRET_KEY
         generateValue: true
