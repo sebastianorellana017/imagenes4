@@ -1,0 +1,22 @@
+databases:
+  - name: djangocrud
+    databaseName: djangocrud
+    user: djangocrud
+ 
+services:
+  - type: web
+    name: djangocrud
+    env: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn djangocrud.wsgi:application"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: djangocrud
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
+      - key: PYTHON_VERSION
+        value: 3.10.6
